@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    {{token}}s
+<!--    {{token}}
     <button type="button" @click="addFun">加</button>
+    <button type="button" @click="addrouters">动态路由</button>-->
 <!--    {{this.$store.state.count.count}}
     {{this.$store.state.count.collapse}}-->
 <!--    {{count}}
@@ -14,6 +15,7 @@
 
 <script>
 import {mapState, mapGetters} from 'vuex'
+import router, {superAdmin} from './router'
 export default {
   name: 'App',
   computed: {
@@ -39,7 +41,12 @@ export default {
       }).catch(err => {
         console.log(err)
       })
+    },
+    addrouters () {
+      router.addRoutes(superAdmin)// 动态添加路由
+      console.log(this.$route.path)
     }
+
   }
 }
 </script>

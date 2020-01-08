@@ -1,23 +1,19 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Layout from '../page/layout/index'
-import Home from '../page/home'
+import Layout from '@/layout/index'
 
 Vue.use(Router)
 
+export const oldRouter = [ // 不需要权限的路由
+  {
+    path: '/',
+    name: 'Layout',
+    component: Layout,
+    hidden: false
+  }
+]
+export const superAdmin = [// 需要权限的路由
+]
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'Layout',
-      component: Layout,
-      children: [
-        {
-          path: '/home',
-          name: 'Home',
-          component: Home
-        }
-      ]
-    }
-  ]
+  routes: oldRouter // 默认使用不需要权限的
 })

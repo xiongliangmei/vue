@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import SidebarItem from './SidebarItem'
+import SidebarItem from './sidebarItem'
 export default {
   naem: 'Sidebar',
   components: {

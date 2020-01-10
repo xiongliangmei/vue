@@ -1,5 +1,10 @@
 <template>
   <div>
-    sdfdsfdfsdf123123123211233
+    permission
   </div>
 </template>
+<script>
+export default {
+  name: 'permission'
+}
+</script>

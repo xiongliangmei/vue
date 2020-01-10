@@ -1,8 +1,12 @@
 <template>
   <div id="app">
-<!--    {{token}}
+    {{count}}
+    <button type="button" @click="getFile">获取用户信息</button>
     <button type="button" @click="addFun">加</button>
-    <button type="button" @click="addrouters">动态路由</button>-->
+    <button type="button" @click="addrouters">动态路由</button>
+    <button type="button" @click="logout">退出Cookies</button>
+    <button type="button" @click="login">设置Cookies</button>
+    <button type="button" @click="getToken">获取Cookies</button>
 <!--    {{this.$store.state.count.count}}
     {{this.$store.state.count.collapse}}-->
 <!--    {{count}}
@@ -14,8 +18,9 @@
 </template>
 
 <script>
-import {mapState, mapGetters} from 'vuex'
+import {mapState, mapGetters, mapActions} from 'vuex'
 import router, {superAdmin} from './router'
+import Cookies from 'js-cookie'
 export default {
   name: 'App',
   computed: {
@@ -29,8 +34,8 @@ export default {
     })
   },
   methods: {
-    // ...mapActions(['addFun', 'reduceFun'])
-    addFun () {
+    ...mapActions(['addFun', 'reduceFun']),
+    /*    addFun () {
       //  /api/login
       const userInfo = {
         username: 'admin',
@@ -41,12 +46,37 @@ export default {
       }).catch(err => {
         console.log(err)
       })
-    },
+    }, */
     addrouters () {
       router.addRoutes(superAdmin)// 动态添加路由
       console.log(this.$route.path)
+    },
+    getInfo () {
+      const token = this.$store.state.user.token
+      this.$store.dispatch('getUserInfo', token)
+    },
+    getFile () {
+      const modulesFiles = require.context('./store/modules', true, /\.js$/)
+      const modules = modulesFiles.keys().reduce((modules, modulePath) => {
+        const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
+        console.log(moduleName + '名称')
+        const value = modulesFiles(modulePath)
+        console.log(value)
+        modules[moduleName] = value.default
+        return modules
+      }, {})
+      console.log(modules)
+    },
+    logout () {
+      Cookies.remove('name')
+    },
+    login () {
+      Cookies.set('name', '12332')
+    },
+    getToken () {
+      console.log(Cookies.get('name'))
+      console.log(typeof Cookies.get('name') === 'undefined')
     }
-
   }
 }
 </script>

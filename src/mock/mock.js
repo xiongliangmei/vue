@@ -9,3 +9,14 @@ Mock.mock('/user/login', 'post', (data) => {
     }
   }
 })
+Mock.mock('/user/info', 'post', (data) => {
+  return {
+    code: 200,
+    data: {
+      'userName': '沉在水底的鱼',
+      'avatar': 'http://123.png',
+      'introduction': '管理委员会成员',
+      'roles': ['admin']
+    }
+  }
+})

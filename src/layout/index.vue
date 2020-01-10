@@ -35,7 +35,9 @@
           </div>
         </el-header>
         <el-main>
-          <div style="background: #ffff;height: 780px">sdfsdfsdfsd</div>
+          <div style="background: #ffff;height: 780px">
+            <router-view />
+          </div>
         </el-main>
       </el-container>
     </el-container>
